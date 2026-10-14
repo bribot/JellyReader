@@ -1,0 +1,21 @@
+local here = (arg[0]:match("^(.*)/[^/]*$") or ".")
+package.path = here .. "/../jellyreader.koplugin/?.lua;" .. package.path
+local C = require("jellyfinclient")
+local port, dir = arg[1], arg[2]
+local c = C.new{server="http://127.0.0.1:"..port.."/", device_id="dev", device_name="Kindle"}
+local r, err = c:login("bri", "wrong"); assert(not r and err:match("401"), err)
+r = assert(c:login("bri", "pw ✓")); assert(r.token=="tok123" and r.user_id=="user1")
+local libs = assert(c:getLibraries()); assert(#libs==3)
+local all = assert(c:getChildren("L1")); assert(#all==250, #all)  -- paging (3 pages of 100)
+assert(all[2].UserData.Played == true)
+local s = assert(c:search("book 24")); assert(#s==11, #s)
+local latest = assert(c:getLatest("L1")); assert(#latest==3)
+assert(c:setPlayed("b005", true)); assert(c:setPlayed("b005", false))
+local p = assert(c:download(all[1], dir, "Book 0")); assert(p==dir.."/Book 0.epub", p)
+local comics = assert(c:getChildren("L3"))
+p = assert(c:download(comics[1], dir, "Saga")); assert(p==dir.."/Saga.cbz", p)
+assert(io.open(p):read("*a"):sub(1,2)=="PK")
+local f = io.open(p,"rb"); assert(f:seek("end")==2+256*4000); f:close()
+local bad, e2 = c:download({Id="nope"}, dir, "x"); assert(not bad and e2:match("Allow media"), e2)
+c.token = "expired"; local _, e3, code = c:getLibraries(); assert(code==401, e3)
+print("ALL CLIENT TESTS PASSED")
