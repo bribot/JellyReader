@@ -93,3 +93,12 @@ Kindle library. Comics (CBZ/CBR) only open in KOReader.
 like Jellyfin 10.9+ and once like Jellyfin 10.8. KOReader's widgets are replaced by small stubs, so the
 tests cover the plugin's logic and its use of the Jellyfin API, not what it looks like on a Kindle.
 Requirements: `luajit`, `lua-socket`, `lua-sec`, `lua-cjson` and `python3`.
+
+## License
+Copyright (C) 2026 bribot
+
+JellyReader is free software: you can redistribute it and/or modify it under the terms of the
+GNU Affero General Public License as published by the Free Software Foundation, either version 3
+of the License, or (at your option) any later version. It is distributed in the hope that it will
+be useful, but WITHOUT ANY WARRANTY; see the [LICENSE](LICENSE) file for the full text.
+This is the same license KOReader uses.
