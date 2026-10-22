@@ -56,7 +56,7 @@ jailbroken Kindle, download items and read them right away in KOReader.
   - Authors and genres come from the books' metadata: EPUB metadata, and `ComicInfo.xml` inside comics.
 
 ## Install
-1. Download this repository (Code → Download ZIP) and unzip it.
+1. Download `jellyreader.koplugin.zip` from the [latest release](https://github.com/bribot/jellyreader/releases/latest) and unzip it.
 2. Connect the Kindle over USB.
 3. Copy the `jellyreader.koplugin` folder into `koreader/plugins/` on the Kindle,
    so you end up with `/mnt/us/koreader/plugins/jellyreader.koplugin/main.lua`.
@@ -87,12 +87,6 @@ Kindle library. Comics (CBZ/CBR) only open in KOReader.
 - **No book libraries found**: the library's content type has to be *Books* or *Mixed*.
 - **Quick Connect is turned off**: an administrator must enable it in Dashboard → General.
 - **Updates waiting to be sent**: JellyReader → Sync with Jellyfin shows how many, and has a button to send them now.
-
-## Development
-`tests/run.sh` runs the test suites against a mock Jellyfin server (`tests/mock.py`), once behaving
-like Jellyfin 10.9+ and once like Jellyfin 10.8. KOReader's widgets are replaced by small stubs, so the
-tests cover the plugin's logic and its use of the Jellyfin API, not what it looks like on a Kindle.
-Requirements: `luajit`, `lua-socket`, `lua-sec`, `lua-cjson` and `python3`.
 
 ## License
 Copyright (C) 2026 bribot
